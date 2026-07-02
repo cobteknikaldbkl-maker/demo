@@ -32,7 +32,6 @@
                 padding: 0 !important;
                 margin: 0 !important;
             }
-            /* Hilangkan warna latar belakang semasa cetakan jika perlu, atau paksakan warna */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -42,7 +41,6 @@
 </head>
 <body class="bg-gray-50 h-screen flex flex-col overflow-hidden">
 
-    <!-- Header Utama Aplikasi -->
     <header class="bg-blue-900 text-white p-4 shadow-md flex justify-between items-center z-10 no-print flex-shrink-0">
         <div class="flex items-center space-x-2">
             <i class="ph-fill ph-warning-circle text-yellow-400 text-2xl"></i>
@@ -53,10 +51,9 @@
         </div>
     </header>
 
-    <!-- Ruangan Utama - Split Screen -->
     <div class="flex flex-col md:flex-row flex-1 overflow-hidden h-full">
         
-        <!-- PANEL KIRI: Borang Input Pengadu (Scrollable) -->
+        <!-- PANEL KIRI: Borang Input (Scrollable) -->
         <div class="w-full md:w-1/2 lg:w-[450px] bg-white border-r border-gray-200 flex flex-col overflow-y-auto no-print shadow-[4px_0_15px_-3px_rgba(0,0,0,0.1)] z-[1]">
             <div class="p-5">
                 <p class="text-sm text-gray-500 mb-6">
@@ -64,75 +61,93 @@
                 </p>
 
                 <form id="aduanForm" class="space-y-6">
-                    <!-- Seksyen 1: Maklumat Pengadu -->
-                    <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100">
-                        <div class="flex items-center space-x-2 mb-4 text-blue-800 font-semibold border-b border-blue-200 pb-2">
-                            <i class="ph ph-user text-lg"></i>
-                            <h2>1. Maklumat Anda (Pengadu)</h2>
-                        </div>
-                        
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1">Nama Penuh</label>
-                                <input type="text" id="pengaduNama" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors" placeholder="Cth: Ahmad bin Abu Bakar" oninput="updatePreview()">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1">No. Telefon</label>
-                                <input type="tel" id="pengaduTelefon" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors" placeholder="Cth: 012-3456789" oninput="updatePreview()">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1">No. Unit Anda (Terkesan)</label>
-                                <input type="text" id="pengaduUnit" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors" placeholder="Cth: A-05-12" oninput="updatePreview()">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1">Alamat Penuh</label>
-                                <textarea id="pengaduAlamat" rows="2" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-none" placeholder="Cth: Pangsapuri Harmoni, Jalan Harmoni 1, 50000 Kuala Lumpur" oninput="updatePreview()"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Seksyen 2: Maklumat Unit -->
-                    <div class="bg-red-50/50 p-4 rounded-lg border border-red-100">
-                        <div class="flex items-center space-x-2 mb-4 text-red-800 font-semibold border-b border-red-200 pb-2">
-                            <i class="ph ph-house text-lg"></i>
-                            <h2>2. Maklumat Unit</h2>
-                        </div>
-                        
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1">No. Unit (Punca Kebocoran) <span class="text-red-500">*</span></label>
-                                <input type="text" id="suspekUnit" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors" placeholder="Cth: A-06-12" oninput="updatePreview()">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1 flex items-center justify-between">
-                                    <span>Nama Pemilik Unit</span>
-                                    <span class="text-[10px] text-gray-400 bg-gray-100 px-1 rounded">Jika tahu</span>
-                                </label>
-                                <input type="text" id="suspekNama" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors" placeholder="Cth: Wong Kah Meng" oninput="updatePreview()">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Seksyen 3: Maklumat Pengurusan -->
+                    
                     <div class="bg-emerald-50/50 p-4 rounded-lg border border-emerald-100">
                         <div class="flex items-center space-x-2 mb-4 text-emerald-800 font-semibold border-b border-emerald-200 pb-2">
                             <i class="ph ph-buildings text-lg"></i>
-                            <h2>3. Maklumat JMB / Pengurusan</h2>
+                            <h2>1. Maklumat Pengurusan & Pengadu</h2>
                         </div>
                         
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1">Nama JMB / Perbadanan Pengurusan</label>
-                                <input type="text" id="jmbNama" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors" placeholder="Cth: JMB Pangsapuri Harmoni" oninput="updatePreview()">
+                        <div class="space-y-4">
+                            <!-- Kumpulan Pengurusan -->
+                            <div class="bg-white p-3 rounded border border-emerald-100 shadow-sm space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-emerald-700 mb-1">Kategori Pengurusan</label>
+                                    <select id="jmbKategori" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 outline-none" onchange="updatePreview()">
+                                        <option value="JMB (Badan Pengurusan Bersama)">JMB (Badan Pengurusan Bersama)</option>
+                                        <option value="MC (Perbadanan Pengurusan)">MC (Perbadanan Pengurusan)</option>
+                                        <option value="SUBMC (Perbadanan Pengurusan Subsidiari)">SUBMC (Perbadanan Pengurusan Subsidiari)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Nama Bangunan / Pembangunan</label>
+                                    <input type="text" id="jmbNama" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Cth: Pangsapuri Harmoni" oninput="updatePreview()">
+                                </div>
                             </div>
-                            <div>
-                                <label class="block text-xs font-medium text-gray-700 mb-1">Alamat Pejabat Pengurusan</label>
-                                <textarea id="jmbAlamat" rows="2" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors resize-none" placeholder="Cth: Pejabat Pengurusan, Tingkat Bawah, Pangsapuri Harmoni..." oninput="updatePreview()"></textarea>
+
+                            <!-- Kumpulan Pengadu -->
+                            <div class="bg-white p-3 rounded border border-emerald-100 shadow-sm space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-emerald-700 mb-1">Kapasiti Pengadu</label>
+                                    <select id="pengaduKapasiti" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 outline-none" onchange="updatePreview()">
+                                        <option value="Pemilik / Penghuni Unit">Pemilik / Penghuni Unit Terkesan</option>
+                                        <option value="Wakil Pihak Pengurusan">Wakil Pihak Pengurusan (JMB/MC/SUBMC)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Nama Pengadu</label>
+                                    <input type="text" id="pengaduNama" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Cth: Ahmad bin Abu Bakar" oninput="updatePreview()">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">No. Telefon Pengadu</label>
+                                    <input type="tel" id="pengaduTelefon" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Cth: 012-3456789" oninput="updatePreview()">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Seksyen 4: Aduan -->
+                    <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100">
+                        <div class="flex items-center space-x-2 mb-4 text-blue-800 font-semibold border-b border-blue-200 pb-2">
+                            <i class="ph ph-house-line text-lg"></i>
+                            <h2>2. Maklumat Unit (Terkesan)</h2>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">No. Unit (Bocor/Rosak) <span class="text-blue-600">*</span></label>
+                                <input type="text" id="terkesanUnit" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors" placeholder="Cth: A-05-12" oninput="updatePreview()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1 flex items-center justify-between">
+                                    <span>Nama Pemilik / Penghuni Unit</span>
+                                    <span class="text-[10px] text-gray-400 bg-gray-100 px-1 rounded">Sama dgn pengadu jika dikosongkan</span>
+                                </label>
+                                <input type="text" id="terkesanNama" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors" placeholder="Cth: Ahmad bin Abu Bakar" oninput="updatePreview()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50/50 p-4 rounded-lg border border-red-100">
+                        <div class="flex items-center space-x-2 mb-4 text-red-800 font-semibold border-b border-red-200 pb-2">
+                            <i class="ph ph-house-line text-lg"></i>
+                            <h2>3. Maklumat Unit (Punca Kebocoran)</h2>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">No. Unit (Punca/Atas) <span class="text-red-500">*</span></label>
+                                <input type="text" id="puncaUnit" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors" placeholder="Cth: A-06-12" oninput="updatePreview()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1 flex items-center justify-between">
+                                    <span>Nama Pemilik / Penghuni Unit Punca</span>
+                                    <span class="text-[10px] text-gray-400 bg-gray-100 px-1 rounded">Jika tahu</span>
+                                </label>
+                                <input type="text" id="puncaNama" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors" placeholder="Cth: Wong Kah Meng" oninput="updatePreview()">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="p-4 rounded-lg border border-gray-200 bg-gray-50/50">
                         <div class="flex items-center space-x-2 mb-4 text-gray-800 font-semibold border-b border-gray-200 pb-2">
                             <i class="ph ph-info text-lg"></i>
@@ -161,13 +176,11 @@
             </div>
         </div>
 
-        <!-- PANEL KANAN: Pratonton Dokumen / Surat Rasmi -->
         <div class="flex-1 bg-gray-200 overflow-y-auto p-4 md:p-8 flex justify-center items-start print:p-0 print:bg-white print:overflow-visible">
             
-            <!-- Slip Ringkasan -->
             <div class="bg-white w-full max-w-2xl min-h-[500px] shadow-lg p-6 md:p-8 relative print-container text-gray-800 border-t-8 border-blue-900 rounded-sm print:border-none print:shadow-none">
                 
-                <!-- Action Bar (Only visible on screen inside preview area) -->
+                <!-- Action Bar -->
                 <div class="absolute top-4 right-4 no-print flex space-x-2">
                     <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-medium flex items-center shadow-sm border border-blue-200">
                         Pratonton Slip Aduan
@@ -188,51 +201,51 @@
 
                 <div class="space-y-6">
                     
-                    <!-- Maklumat Pengadu -->
                     <div>
-                        <h3 class="text-sm font-bold text-blue-900 uppercase border-b-2 border-blue-100 pb-1 mb-3">Maklumat Pengadu (Terkesan)</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
-                            <div class="text-gray-500 sm:col-span-1">Nama Penuh</div>
+                        <h3 class="text-sm font-bold text-emerald-900 uppercase border-b-2 border-emerald-100 pb-1 mb-3">1. Maklumat Pengurusan & Pengadu</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm bg-emerald-50 p-3 rounded border border-emerald-100">
+                            <div class="text-emerald-700 sm:col-span-1 font-medium">Badan Pengurusan</div>
+                            <div class="sm:col-span-2 font-bold text-emerald-800" id="previewJmb">
+                                <span class="bg-yellow-100 text-black px-1 rounded">- Tiada Data -</span>
+                            </div>
+
+                            <div class="col-span-1 sm:col-span-3 border-b border-emerald-200 my-1"></div>
+                            
+                            <div class="text-gray-600 sm:col-span-1">Kapasiti Pengadu</div>
+                            <div class="sm:col-span-2 font-medium" id="previewPengaduKapasiti">Pemilik / Penghuni Unit</div>
+                            
+                            <div class="text-gray-600 sm:col-span-1">Nama Pengadu</div>
                             <div class="sm:col-span-2 font-medium" id="previewPengaduNama"><span class="bg-red-100 text-red-500 px-1 rounded italic text-xs">- Tiada Data -</span></div>
                             
-                            <div class="text-gray-500 sm:col-span-1">No. Unit</div>
-                            <div class="sm:col-span-2 font-medium" id="previewPengaduUnit"><span class="bg-red-100 text-red-500 px-1 rounded italic text-xs">- Tiada Data -</span></div>
-                            
-                            <div class="text-gray-500 sm:col-span-1">No. Telefon</div>
+                            <div class="text-gray-600 sm:col-span-1">No. Telefon</div>
                             <div class="sm:col-span-2 font-medium" id="previewPengaduTelefon"><span class="bg-red-100 text-red-500 px-1 rounded italic text-xs">- Tiada Data -</span></div>
-                            
-                            <div class="text-gray-500 sm:col-span-1">Alamat</div>
-                            <div class="sm:col-span-2 font-medium whitespace-pre-wrap" id="previewPengaduAlamat"><span class="bg-red-100 text-red-500 px-1 rounded italic text-xs">- Tiada Data -</span></div>
                         </div>
                     </div>
 
-                    <!-- Maklumat Unit Punca -->
                     <div>
-                        <h3 class="text-sm font-bold text-red-900 uppercase border-b-2 border-red-100 pb-1 mb-3">Maklumat Unit (Punca Kerosakan)</h3>
+                        <h3 class="text-sm font-bold text-blue-900 uppercase border-b-2 border-blue-100 pb-1 mb-3">2. Maklumat Unit (Terkesan)</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                            <div class="text-gray-500 sm:col-span-1">No. Unit Terkesan</div>
+                            <div class="sm:col-span-2 font-medium" id="previewTerkesanUnit"><span class="bg-red-100 text-red-500 px-1 rounded italic text-xs">- Tiada Data -</span></div>
+                            
+                            <div class="text-gray-500 sm:col-span-1">Pemilik / Penghuni</div>
+                            <div class="sm:col-span-2 font-medium" id="previewTerkesanNama"><span class="bg-gray-100 text-gray-500 px-1 rounded italic text-xs">Sama seperti pengadu</span></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-sm font-bold text-red-900 uppercase border-b-2 border-red-100 pb-1 mb-3">3. Maklumat Unit (Punca Kerosakan)</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm bg-red-50 p-3 rounded border border-red-100">
                             <div class="text-red-700 sm:col-span-1 font-medium">No. Unit Punca</div>
-                            <div class="sm:col-span-2 font-bold text-red-700" id="previewSuspekUnit"><span class="bg-red-200 text-red-700 px-1 rounded italic text-xs">- Tiada Data -</span></div>
+                            <div class="sm:col-span-2 font-bold text-red-700" id="previewPuncaUnit"><span class="bg-red-200 text-red-700 px-1 rounded italic text-xs">- Tiada Data -</span></div>
                             
                             <div class="text-gray-500 sm:col-span-1">Nama Pemilik</div>
-                            <div class="sm:col-span-2 font-medium" id="previewSuspekNama"><span class="bg-yellow-100 text-yellow-700 px-1 rounded italic text-xs">Tidak Diketahui</span></div>
+                            <div class="sm:col-span-2 font-medium" id="previewPuncaNama"><span class="bg-yellow-100 text-yellow-700 px-1 rounded italic text-xs">Tidak Diketahui</span></div>
                         </div>
                     </div>
 
-                    <!-- Maklumat JMB -->
                     <div>
-                        <h3 class="text-sm font-bold text-emerald-900 uppercase border-b-2 border-emerald-100 pb-1 mb-3">Maklumat Pengurusan (JMB/MC)</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
-                            <div class="text-gray-500 sm:col-span-1">Nama Badan Pengurusan</div>
-                            <div class="sm:col-span-2 font-medium" id="previewJmbNama"><span class="bg-red-100 text-red-500 px-1 rounded italic text-xs">- Tiada Data -</span></div>
-                            
-                            <div class="text-gray-500 sm:col-span-1">Alamat Pejabat</div>
-                            <div class="sm:col-span-2 font-medium whitespace-pre-wrap" id="previewJmbAlamat"><span class="bg-red-100 text-red-500 px-1 rounded italic text-xs">- Tiada Data -</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Keterangan -->
-                    <div>
-                        <h3 class="text-sm font-bold text-gray-900 uppercase border-b-2 border-gray-200 pb-1 mb-3">Keterangan / Nota Kerosakan</h3>
+                        <h3 class="text-sm font-bold text-gray-900 uppercase border-b-2 border-gray-200 pb-1 mb-3">4. Keterangan / Nota Kerosakan</h3>
                         <div class="text-sm bg-gray-50 p-4 rounded min-h-[80px] border border-gray-200 whitespace-pre-wrap italic" id="previewKeterangan">
                             <span class="text-gray-400 not-italic">Tiada nota tambahan diberikan oleh pengadu.</span>
                         </div>
@@ -244,7 +257,7 @@
                 <div class="mt-12 pt-6 border-t border-dashed border-gray-300 text-center">
                     <p class="text-xs text-gray-500 leading-relaxed">
                         Dokumen ini adalah cetakan janaan komputer bagi tujuan rujukan dan simpanan pengadu. 
-                        <br/>Sila bawa salinan ini semasa berurusan dengan pihak Pengurusan (JMB/MC).
+                        <br/>Sila bawa salinan ini semasa berurusan dengan pihak Pengurusan (JMB/MC/SUBMC).
                     </p>
                 </div>
 
@@ -253,10 +266,9 @@
     </div>
 
     <script>
-        // Set default date to today
+        // Set tarikh default hari ini
         document.getElementById('tarikhAduan').valueAsDate = new Date();
 
-        // Helper function to format date
         function formatTarikhRasmi(tarikhStr) {
             if (!tarikhStr) return '';
             const date = new Date(tarikhStr);
@@ -264,7 +276,6 @@
             return `${date.getDate()} ${bulan[date.getMonth()]} ${date.getFullYear()}`;
         }
 
-        // Helper function to create highlight span
         function createHighlight(val, type = 'data', fallbackText = '- Tiada Data -') {
             if (val && val.trim() !== '') {
                 return `<span class="bg-yellow-100 text-black px-1 rounded font-semibold">${val}</span>`;
@@ -276,38 +287,47 @@
             }
         }
 
-        // Function to update the preview panel
         function updatePreview() {
-            // Get values
+            // Ambil nilai Input (Seksyen 1)
+            const valJmbKategori = document.getElementById('jmbKategori').value;
+            const valJmbNama = document.getElementById('jmbNama').value;
+            const valPengaduKapasiti = document.getElementById('pengaduKapasiti').value;
             const valPengaduNama = document.getElementById('pengaduNama').value;
             const valPengaduTelefon = document.getElementById('pengaduTelefon').value;
-            const valPengaduUnit = document.getElementById('pengaduUnit').value;
-            const valPengaduAlamat = document.getElementById('pengaduAlamat').value;
             
-            const valSuspekUnit = document.getElementById('suspekUnit').value;
-            const valSuspekNama = document.getElementById('suspekNama').value;
+            // Ambil nilai Input (Seksyen 2)
+            const valTerkesanUnit = document.getElementById('terkesanUnit').value;
+            const valTerkesanNama = document.getElementById('terkesanNama').value;
             
-            const valJmbNama = document.getElementById('jmbNama').value;
-            const valJmbAlamat = document.getElementById('jmbAlamat').value;
+            // Ambil nilai Input (Seksyen 3)
+            const valPuncaUnit = document.getElementById('puncaUnit').value;
+            const valPuncaNama = document.getElementById('puncaNama').value;
             
+            // Ambil nilai Input (Seksyen 4)
             const valTarikh = document.getElementById('tarikhAduan').value;
             const valKeterangan = document.getElementById('keteranganKerosakan').value;
 
-            // Update DOM Elements
+            // --- KEMASKINI DOM PRATONTON ---
+
+            // Tarikh
             document.getElementById('previewTarikh').innerHTML = valTarikh ? formatTarikhRasmi(valTarikh) : createHighlight('', 'required');
             
+            // Seksyen 1
+            const gabunganJmb = valJmbNama ? `${valJmbKategori} ${valJmbNama}` : '';
+            document.getElementById('previewJmb').innerHTML = createHighlight(gabunganJmb, 'required', '- Sila Isi Nama Bangunan -');
+            document.getElementById('previewPengaduKapasiti').innerText = valPengaduKapasiti;
             document.getElementById('previewPengaduNama').innerHTML = createHighlight(valPengaduNama);
-            document.getElementById('previewPengaduUnit').innerHTML = createHighlight(valPengaduUnit);
             document.getElementById('previewPengaduTelefon').innerHTML = createHighlight(valPengaduTelefon);
-            document.getElementById('previewPengaduAlamat').innerHTML = createHighlight(valPengaduAlamat);
             
-            document.getElementById('previewSuspekUnit').innerHTML = createHighlight(valSuspekUnit);
-            document.getElementById('previewSuspekNama').innerHTML = createHighlight(valSuspekNama, 'optional', 'Tidak Diketahui');
+            // Seksyen 2
+            document.getElementById('previewTerkesanUnit').innerHTML = createHighlight(valTerkesanUnit);
+            document.getElementById('previewTerkesanNama').innerHTML = createHighlight(valTerkesanNama, 'optional', 'Sama seperti pengadu di atas');
             
-            document.getElementById('previewJmbNama').innerHTML = createHighlight(valJmbNama);
-            document.getElementById('previewJmbAlamat').innerHTML = createHighlight(valJmbAlamat);
+            // Seksyen 3
+            document.getElementById('previewPuncaUnit').innerHTML = createHighlight(valPuncaUnit);
+            document.getElementById('previewPuncaNama').innerHTML = createHighlight(valPuncaNama, 'optional', 'Tidak Diketahui');
             
-            // Special handling for keterangan (no yellow background, just text or placeholder)
+            // Seksyen 4
             const elKeterangan = document.getElementById('previewKeterangan');
             if (valKeterangan && valKeterangan.trim() !== '') {
                 elKeterangan.innerHTML = valKeterangan;
@@ -320,7 +340,7 @@
             }
         }
 
-        // Initialize preview on page load
+        // Init pada load pertama
         window.onload = function() {
             updatePreview();
         };
